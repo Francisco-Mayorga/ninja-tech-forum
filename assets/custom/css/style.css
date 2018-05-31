@@ -10,12 +10,9 @@ body {
     background-color: #f5f5f5;
 }
 
-.detallesmensajes {
+.topiclist {
     text-align:  justify;
     padding: 9px;
-    border-radius: 3px;
-    border: 1.5px solid #f00;
-    background-color: #f5f5f5;
     width:100%;
     word-wrap: break-word;
 }
