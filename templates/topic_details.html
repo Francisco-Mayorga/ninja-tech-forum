@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de los mensajes {% endblock title %}
+{% block page_content %}
+<div class="container-fluid">
+    <div class="col-sm-6 col-md-6 col-md-offset-3>
+        <div class="detallesmensajes">
+            <h1>Topic details</h1>
+            <hr size="10"/>
+            <b>Message ID:</b> <p>{{ topic.key.id() }}</p>
+            <b>Title:</b> <p>{{ topic.title }}</p>
+            <b>Email:</b> <p>{{ topic.author_email }}</p>
+            <b>Content:</b> <p>{{ topic.content }}</p>
+            <b>Date:</b> <p>{{ topic.created }}</p>
+        </div>g
+    </div>
+</div>
+{% endblock page_content %}
