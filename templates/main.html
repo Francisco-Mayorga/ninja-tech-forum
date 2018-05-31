@@ -6,16 +6,17 @@
     <p>Welcome to Ninja Tech Forum - the best forum for tech fans. Coming soon!</p>
 </div>
 
-<div class="container-fluid">
-    <div class="col-sm-8 col-md-8 col-md-offset-2  wow fadeInLeft" data-wow-delay="0.5s">
-      <div class="mensajesenviados">
-        <h1>List all the topics</h1>
-        <hr size="10"/>
-        {% for topic in topics %}
-        <p><a href="/topic/{{ topic.key.id() }}">{{ topic.title }}, {{ topic.content }}, {{ topic.author_email }}</a></p>
-        {% endfor %}
-      </div>
-    </div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">List all the topics</div>
+
+  <!-- Table -->
+  <table class="table">
+      {% for topic in topics %}
+      <a href="/topic/{{ topic.key.id() }}/details">{{ topic.title }}</a>
+      <p>{{ topic.created }}, {{ topic.author_email }}</p>
+      {% endfor %}
+  </table>
 </div>
 
 {% endblock content %}

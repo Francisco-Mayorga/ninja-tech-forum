@@ -29,7 +29,9 @@ class TopicAddHandler(BaseHandler):
 
         new_topic.put()
 
-        return self.redirect_to("topic-details")
+        return self.redirect_to("topic-details", topic_id=new_topic.key.id())
+
+
 
 
 
