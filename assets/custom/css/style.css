@@ -2,6 +2,11 @@ body {
     background-color: grey;
 }
 
+.jumbotron {
+    text-align:  center;
+    border-radius: 5px;
+}
+
 .mensajesenviados {
     text-align:  center;
     padding: 9px;
