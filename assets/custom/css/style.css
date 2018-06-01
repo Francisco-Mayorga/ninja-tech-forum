@@ -7,14 +7,6 @@ body {
     border-radius: 5px;
 }
 
-.mensajesenviados {
-    text-align:  center;
-    padding: 9px;
-    border-radius: 3px;
-    border: 1.5px solid #f00;
-    background-color: #f5f5f5;
-}
-
 .topiclist {
     text-align:  justify;
     padding: 9px;

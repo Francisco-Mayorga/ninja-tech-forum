@@ -16,7 +16,6 @@
                 <tr>
                     <th>Title</th>
                     <th>Author_email</th>
-                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +23,6 @@
                 <tr>
                     <td><a href="/topic/{{ topic.key.id() }}/details">{{ topic.title }}</a></td>
                     <td>{{ topic.author_email }}</td>
-                    <td>{{ topic.created }}</td>
                 </tr>
             {% endfor %}
             </tbody>
