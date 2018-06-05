@@ -29,4 +29,4 @@ class CommentAddHandler(BaseHandler):
 
         new_comment.put()
 
-        return self.redirect_to("topic-details", topic_id=new_comment.key.id())
+        return self.redirect_to("topic-details", topic_id=topic.key.id())
