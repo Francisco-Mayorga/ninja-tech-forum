@@ -20,11 +20,6 @@ class TopicAddHandler(BaseHandler):
         return self.render_template("topic_add.html", params=context)
 
     def post(self):
-        logged_user = users.get_current_user()
-
-        if not logged_user:
-            return self.write("Please login before you're allowed to post a topic.")
-
         csrf_token = self.request.get("csrf-token")
         mem_token =memcache.get(key=csrf_token)
 
@@ -32,6 +27,10 @@ class TopicAddHandler(BaseHandler):
             return self.write("You are evil attacker...")
 
 
+        logged_user = users.get_current_user()
+
+        if not logged_user:
+            return self.write("Please login before you're allowed to post a topic.")
 
         title_value = self.request.get("title")
         text_value = self.request.get("text")
