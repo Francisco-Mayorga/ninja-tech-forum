@@ -13,5 +13,4 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/topic/add', TopicAddHandler, name="topic-add"),
     webapp2.Route('/topic/<topic_id:\d+>/details', TopicDetailsHandler, name="topic-details"),
     webapp2.Route('/topic/<topic_id:\d+>/comment', CommentAddHandler, name="comment-add"),
-
 ], debug=True)

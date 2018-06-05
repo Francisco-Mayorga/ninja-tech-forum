@@ -1,8 +1,9 @@
-from google.appengine.api import memcache, users
 import uuid
 from handlers.base import BaseHandler
 from models.topic import Topic
 from models.comment import Comment
+from google.appengine.api import memcache, users
+
 
 
 class TopicDetailsHandler(BaseHandler):
