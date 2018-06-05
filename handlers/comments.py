@@ -3,6 +3,7 @@ from google.appengine.api import users, memcache
 from models.comment import Comment
 from models.topic import Topic
 
+
 class CommentAddHandler(BaseHandler):
     def post(self, topic_id):
         logged_user = users.get_current_user()
@@ -16,18 +17,10 @@ class CommentAddHandler(BaseHandler):
         if not mem_token or mem_token != logged_user.email():
             return self.write("You are evil attacker...")
 
-        title_value = self.request.get ("title")
-        text_value = self.request.get("comment-text")
+        text_value = self.request.get("text")
         topic = Topic.get_by_id(int(topic_id))
 
-        if not title_value:
-            return self.write("Title field is required")
-
-        if not text_value:
-            return self.write("Text field is required")
-
         new_comment = Comment(
-            title=title_value,
             content=text_value,
             author_email=logged_user.email(),
             topic_id=topic.key.id(),
