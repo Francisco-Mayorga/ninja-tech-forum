@@ -3,7 +3,6 @@ from handlers.base import BaseHandler
 from google.appengine.api import users, memcache
 from models.topic import Topic
 
-
 class TopicAddHandler(BaseHandler):
     def get(self):
         logged_user = users.get_current_user()

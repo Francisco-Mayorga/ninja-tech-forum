@@ -21,7 +21,7 @@
             <tbody>
             {% for topic in topics %}
                 <tr>
-                    <td><a href="/topic/{{ topic.key.id() }}/comment">{{ topic.title }}</a></td>
+                    <td><a href="/topic/{{ topic.key.id() }}/details">{{ topic.title }}</a></td>
                     <td>{{ topic.author_email }}</td>
                 </tr>
             {% endfor %}
