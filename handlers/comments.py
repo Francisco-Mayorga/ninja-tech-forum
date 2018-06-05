@@ -1,11 +1,10 @@
-import uuid
-
 from handlers.base import BaseHandler
 from google.appengine.api import users, memcache
 from models.comment import Comment
+from models.topic import Topic
 
 class CommentAddHandler(BaseHandler):
-    def post(self):
+    def post(self, topic_id):
         logged_user = users.get_current_user()
 
         if not logged_user:
@@ -17,8 +16,9 @@ class CommentAddHandler(BaseHandler):
         if not mem_token or mem_token != logged_user.email():
             return self.write("You are evil attacker...")
 
-        title_value = self.request.get("title")
-        text_value = self.request.get("text")
+        title_value = self.request.get ("title")
+        text_value = self.request.get("comment-text")
+        topic = Topic.get_by_id(int(topic_id))
 
         if not title_value:
             return self.write("Title field is required")
@@ -30,6 +30,8 @@ class CommentAddHandler(BaseHandler):
             title=title_value,
             content=text_value,
             author_email=logged_user.email(),
+            topic_id=topic.key.id(),
+            topic_title=topic.title,
         )
 
         new_comment.put()
