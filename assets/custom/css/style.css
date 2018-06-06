@@ -13,3 +13,6 @@ body {
     width:100%;
     word-wrap: break-word;
 }
+
+.form-control {
+    resize: none;}
