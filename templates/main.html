@@ -2,34 +2,38 @@
 {% block title %}Main page{% endblock title %}
 {% block content %}
 <div class="col-sm-6 col-md-6 col-md-offset-3">
-<div class="jumbotron">
+    <div class="jumbotron">
     <h1>Ninja Tech Forum</h1>
     <p>Welcome to Ninja Tech Forum - the best forum for tech fans. Coming soon!</p>
+    </div>
 </div>
-</div>
+
+<!-- LISTADO DE TOPICS -->
+
 <div class="container-fluid">
     <div class="col-sm-6 col-md-6 col-md-offset-3">
     <div class="panel panel-default">
-    <div class="panel-heading">List all the topics</div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author_email</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for topic in topics %}
-                <tr>
-                    <td><a href="/topic/{{ topic.key.id() }}/details">{{ topic.title }}</a></td>
-                    <td>{{ topic.author_email }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
+        <div class="panel-heading">List all the topics</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author_email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic in topics %}
+                    <tr>
+                        <td><a href="/topic/{{ topic.key.id() }}/details">{{ topic.title }}</a></td>
+                        <td>{{ topic.author_email }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
     </div>
     </div>
 </div>
+
+<!-- FIN LISTADO DE TOPICS -->
 
 {% endblock content %}
