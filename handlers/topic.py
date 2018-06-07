@@ -66,3 +66,17 @@ class TopicDetailsHandler(BaseHandler):
         details = {"topic": topic, "comments": comments, "csrf_token": csrf_token}
 
         return self.render_template("topic_details.html", params=details)
+
+
+class TopicDeleteHandler(BaseHandler):
+    def post(self, topic_id):
+        logged_user = users.get_current_user()
+        if not logged_user:
+            return self.write("Please login before you're allowed to post a topic.")
+
+        topic = Topic.get_by_id(int(topic_id))
+        topic.deleted = True
+        topic.put()
+
+        return self.redirect_to("main-page")
+
