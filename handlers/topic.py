@@ -41,13 +41,12 @@ class TopicAddHandler(BaseHandler):
         if not text_value:
             return self.write("Text field is required")
 
-        new_topic = Topic(
+
+        new_topic = Topic.create(
             title=title_value,
             content=text_value,
             author_email=logged_user.email(),
         )
-
-        new_topic.put()
 
         return self.redirect_to("topic-details", topic_id=new_topic.key.id())
 
