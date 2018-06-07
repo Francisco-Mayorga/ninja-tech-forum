@@ -10,12 +10,11 @@ class Topic(ndb.Model):
     deleted = ndb.BooleanProperty(default=False)
 
     @classmethod
-    def create(cls, title_value, text_value, logged_user, new_topic):
+    def create(cls, title_value, text_value, logged_user):
         new_topic = cls(
             title=title_value,
             content=text_value,
             author_email=logged_user.email(),
-            topic_id=new_topic.key.id(),
         )
 
         new_topic.put()

@@ -20,9 +20,8 @@ class TopicAddHandler(BaseHandler):
 
         return self.render_template("topic_add.html", params=context)
 
-    def post(self, new_topic=None):
+    def post(self):
         logged_user = users.get_current_user()
-
         if not logged_user:
             return self.write("Please login before you're allowed to post a topic.")
 
@@ -41,11 +40,10 @@ class TopicAddHandler(BaseHandler):
         if not text_value:
             return self.write("Text field is required")
 
-        Topic.create(
+        new_topic = Topic.create(
             title_value=title_value,
             text_value=text_value,
-            logged_user=logged_user.email(),
-            new_topic=new_topic
+            logged_user=logged_user,
         )
 
         return self.redirect_to("topic-details", topic_id=new_topic.key.id())
