@@ -3,7 +3,7 @@ import webapp2
 from handlers.home import MainHandler
 from handlers.cookie import CookieAlertHandler
 from handlers.topic import TopicAddHandler
-from handlers.topic_details import TopicDetailsHandler
+from handlers.topic import TopicDetailsHandler
 from handlers.comments import CommentAddHandler
 from workers.email_new_comment import EmailNewCommentWorker
 
