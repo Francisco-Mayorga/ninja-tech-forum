@@ -20,7 +20,7 @@ class TopicAddHandler(BaseHandler):
 
         return self.render_template("topic_add.html", params=context)
 
-    def post(self):
+    def post(self, new_topic=None):
         logged_user = users.get_current_user()
 
         if not logged_user:
@@ -41,16 +41,14 @@ class TopicAddHandler(BaseHandler):
         if not text_value:
             return self.write("Text field is required")
 
-
-        new_topic = Topic.create(
-            title=title_value,
-            content=text_value,
-            author_email=logged_user.email(),
+        Topic.create(
+            title_value=title_value,
+            text_value=text_value,
+            logged_user=logged_user.email(),
+            new_topic=new_topic
         )
 
         return self.redirect_to("topic-details", topic_id=new_topic.key.id())
-
-
 
 
 class TopicDetailsHandler(BaseHandler):
@@ -60,7 +58,8 @@ class TopicDetailsHandler(BaseHandler):
             return self.write("Please login before you're allowed to post a topic.")
 
         topic = Topic.get_by_id(int(topic_id))
-        comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(Comment.created).fetch()
+        comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(
+            Comment.created).fetch()
 
         csrf_token = str(uuid.uuid4())
         memcache.add(key=csrf_token, value=logged_user.email(),
