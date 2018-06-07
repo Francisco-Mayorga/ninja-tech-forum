@@ -1,3 +1,4 @@
+from google.appengine.api import taskqueue
 from google.appengine.ext import ndb
 
 class Comment(ndb.Model):
@@ -8,3 +9,23 @@ class Comment(ndb.Model):
     created = ndb.DateTimeProperty(auto_now_add=True)
     updated = ndb.DateTimeProperty(auto_now=True)
     deleted = ndb.BooleanProperty(default=False)
+
+    @classmethod
+    def create(cls, text_value, logged_user, topic):
+        new_comment = cls(
+            content=text_value,
+            author_email=logged_user.email(),
+            topic_id=topic.key.id(),
+            topic_title=topic.title,
+        )
+        new_comment.put()
+
+        taskqueue.add(
+            url='/task/email-new-comment',
+            params={"topic-author-email": topic.author_email,
+                    "topic-title": topic.title,
+                    "topic-id": topic.key.id(),
+                    }
+        )
+
+        return new_comment

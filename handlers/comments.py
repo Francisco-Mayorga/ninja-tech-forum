@@ -18,15 +18,12 @@ class CommentAddHandler(BaseHandler):
             return self.write("You are evil attacker...")
 
         text_value = self.request.get("text")
+
         topic = Topic.get_by_id(int(topic_id))
 
-        new_comment = Comment(
-            content=text_value,
-            author_email=logged_user.email(),
-            topic_id=topic.key.id(),
-            topic_title=topic.title,
+        Comment.create(
+            text_value=text_value,
+            logged_user=logged_user,
+            topic=topic,
         )
-
-        new_comment.put()
-
         return self.redirect_to("topic-details", topic_id=topic.key.id())
