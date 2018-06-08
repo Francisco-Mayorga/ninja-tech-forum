@@ -53,6 +53,7 @@ class TopicDetailsHandler(BaseHandler):
 
 
 class TopicDeleteHandler(BaseHandler):
+    @validate_csrf
     def post(self, topic_id):
         logged_user = users.get_current_user()
 

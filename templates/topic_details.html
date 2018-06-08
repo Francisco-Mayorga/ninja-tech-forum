@@ -53,6 +53,7 @@
             <button type="submit" class="btn btn-success">Submit</button>
             </form>
             <form action="/topic/{{ topic.key.id() }}/delete" method="post">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
         <button type="submit" class="btn btn-danger">Delete Topic</button>
 
     </form>
