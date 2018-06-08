@@ -53,14 +53,15 @@ class TopicDetailsHandler(BaseHandler):
 
 
 class TopicDeleteHandler(BaseHandler):
-    @validate_csrf
     def post(self, topic_id):
         logged_user = users.get_current_user()
-        if not logged_user:
-            return self.write("Please login before you're allowed to post a topic.")
 
         topic = Topic.get_by_id(int(topic_id))
-        topic.deleted = True
+        if topic.author_email == logged_user.email() or users.is_current_user_admin():
+            topic.deleted = True
+        else:
+            return self.response.write('only the topic author or Ninja Tech Forum admin can delete the topic!')
+
         topic.put()
 
         return self.redirect_to("main-page")
