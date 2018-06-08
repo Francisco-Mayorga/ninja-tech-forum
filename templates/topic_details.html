@@ -46,7 +46,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Add comments</div>
             <form action="/topic/{{ topic.key.id() }}/comment" method="post">
-                <input type="hidden" name="csrf-token" value="{{csrf_token}}">
+                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
                 <div class="form-group">
                     <textarea name="text" class="form-control" rows="6" required></textarea>
                 </div>
