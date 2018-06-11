@@ -11,4 +11,9 @@ class ListCommentHandler(BaseHandler):
         if not logged_user:
             return self.write("Please login before you're allowed to post a topic.")
 
-        return self.render_template_with_csrf("list_comment.html")
+        comments = Comment.query(Comment.deleted == False).order(
+            Comment.created).fetch()
+
+        context = {"comments": comments}
+
+        return self.render_template_with_csrf("list_comment.html", params=context)
