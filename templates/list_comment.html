@@ -9,7 +9,7 @@
             <div class="panel-heading">My comments</div>
             {% for comment in comments %}
                 <div class="topiclist">
-                    <p>{{ comment.topic_title }}</p>
+                    <p>{{ topic.title }}</p>
                     <p>{{ comment.author_email }}</p>
                     <p>{{ comment.content }}</p>
                     <p>{{ topic.created }}</p>

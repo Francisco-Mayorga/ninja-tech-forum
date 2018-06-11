@@ -14,7 +14,7 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/topic/add', TopicAddHandler, name="topic-add"),
     webapp2.Route('/topic/<topic_id:\d+>/details', TopicDetailsHandler, name="topic-details"),
     webapp2.Route('/topic/<topic_id:\d+>/comment', CommentAddHandler, name="comment-add"),
-    webapp2.Route('/topic/<topic_id:\d+>/list_comment', ListCommentHandler, name="my-comments"),
+    webapp2.Route('/list_comment', ListCommentHandler, name="my-comments"),
     webapp2.Route('/task/email-new-comment', EmailNewCommentWorker, name="task-email-new-comment"),
     webapp2.Route('/topic/<topic_id:\d+>/delete', TopicDeleteHandler, name="topic-delete"),
 

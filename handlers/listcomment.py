@@ -6,15 +6,9 @@ from models.topic import Topic
 
 
 class ListCommentHandler(BaseHandler):
-    def get(self, topic_id):
+    def get(self):
         logged_user = users.get_current_user()
         if not logged_user:
             return self.write("Please login before you're allowed to post a topic.")
 
-        topic = Topic.get_by_id(int(topic_id))
-        comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(
-            Comment.created).fetch()
-
-        details = {"topic": topic, "comments": comments}
-
-        return self.render_template_with_csrf("list_comment.html", params=details)
+        return self.render_template_with_csrf("list_comment.html")
