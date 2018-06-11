@@ -20,3 +20,10 @@ class Topic(ndb.Model):
         new_topic.put()
 
         return new_topic
+
+    @classmethod
+    def delete(cls, topic):
+        topic.deleted = True
+        topic.put()
+
+        return topic
