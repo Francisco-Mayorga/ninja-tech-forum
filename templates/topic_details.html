@@ -8,7 +8,16 @@
 <div class="container-fluid">
     <div class="col-sm-6 col-md-6 col-md-offset-3">
         <div class="panel panel-default">
-            <div class="panel-heading">Topic details</div>
+            <div class="panel-heading">Topic details
+                      <div class="pull-right">
+            {% if not is_subscribed %}
+              <a href="/topic/{{ topic.key.id() }}/subscribe" class="btn btn-info btn-xs">Subscribe</a>
+            {% endif %}
+            {% if can_delete %}
+              <a href="/topic/{{ topic.key.id() }}/delete" class="btn btn-danger btn-xs">Delete</a>
+            {% endif %}
+          </div>
+            </div>
                 <div class="topiclist">
                     <b>ID:</b> <p>{{ topic.key.id() }}</p>
                     <b>Title:</b> <p>{{ topic.title }}</p>
