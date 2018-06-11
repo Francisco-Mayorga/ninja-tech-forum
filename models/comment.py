@@ -1,6 +1,7 @@
 from google.appengine.api import taskqueue
 from google.appengine.ext import ndb
 
+
 class Comment(ndb.Model):
     content = ndb.TextProperty()
     author_email = ndb.StringProperty()
@@ -29,3 +30,17 @@ class Comment(ndb.Model):
         )
 
         return new_comment
+
+    def delete(self):
+        self.deleted = True
+        self.put()
+
+        return self
+
+    @classmethod
+    def filter_by_topic(cls, topic_id):
+        return cls.query(cls.deleted == False).filter(cls.topic_id == topic_id)
+
+    @classmethod
+    def filter_by_user(cls, user_email):
+        return cls.query(cls.deleted == False).filter(cls.author_email == user_email)

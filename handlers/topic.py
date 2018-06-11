@@ -63,8 +63,7 @@ class TopicDeleteHandler(BaseHandler):
         else:
             return self.response.write('only the topic author or Ninja Tech Forum admin can delete the topic!')
 
-        Topic.delete(
-            topic=topic
-        )
+        topic.delete()
+
 
         return self.redirect_to("main-page")

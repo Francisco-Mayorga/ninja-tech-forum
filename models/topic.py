@@ -21,9 +21,8 @@ class Topic(ndb.Model):
 
         return new_topic
 
-    @classmethod
-    def delete(cls, topic):
-        topic.deleted = True
-        topic.put()
+    def delete(self):
+        self.deleted = True
+        self.put()
 
-        return topic
+        return self

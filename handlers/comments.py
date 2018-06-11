@@ -23,3 +23,18 @@ class CommentAddHandler(BaseHandler):
             topic=topic,
         )
         return self.redirect_to("topic-details", topic_id=topic.key.id())
+
+
+class ListCommentHandler(BaseHandler):
+    def get(self):
+        logged_user = users.get_current_user()
+        if not logged_user:
+            return self.write("Please login before you're allowed to post a topic.")
+
+        comments = Comment.filter_by_user(logged_user.email()).fetch()
+
+        context = {
+            "comments": comments,
+        }
+
+        return self.render_template("list_comment.html", params=context)
