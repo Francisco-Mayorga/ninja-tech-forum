@@ -14,7 +14,7 @@
                     <b>Title:</b> <p>{{ topic.title }}</p>
                     <b>Email:</b> <p>{{ topic.author_email }}</p>
                     <b>Content:</b> <p>{{ topic.content }}</p>
-                    <b>Date:</b> <p>{{ topic.created }}</p>
+                    <b>Date:</b> <p>{{ topic.created.strftime('%d/%m/%Y at %H:%M') }}</p>
                 </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <div class="topiclist">
                     <p>{{ comment.author_email }}</p>
                     <p>{{ comment.content }}</p>
-                    <p>{{ topic.created }}</p>
+                    <p>{{ topic.created.strftime('%d/%m/%Y at %H:%M') }}</p>
                 </div>
             {% endfor %}
         </div>
