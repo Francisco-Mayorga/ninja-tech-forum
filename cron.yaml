@@ -2,3 +2,7 @@ cron:
 - description: Delete topics older than 30 days
   url: /cron/delete-topics
   schedule: every sunday 09:00
+
+- description: Receive an email each day about the hottest topics
+  url: /cron/subscribe-topics
+  schedule: every 24 hours

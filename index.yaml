@@ -20,3 +20,8 @@ indexes:
   - name: deleted
   - name: topic_id
   - name: created
+
+- kind: Topic
+  properties:
+  - name: deleted
+  - name: updated
