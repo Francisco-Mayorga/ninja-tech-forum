@@ -6,3 +6,7 @@ cron:
 - description: Receive an email each day about the hottest topics
   url: /cron/subscribe-topics
   schedule: every 24 hours
+
+- description: Delete comments older than 30 days
+  url: /cron/delete-comments
+  schedule: every monday 12:00

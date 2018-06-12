@@ -14,6 +14,7 @@
                       <th>Comment</th>
                       <th>Topic</th>
                       <th>Created</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                 <tbody>
@@ -22,6 +23,11 @@
                     <td>{{ comment.content }}</td>
                     <td><a href="/topic/{{ comment.topic_id }}/details">{{ comment.topic_title }}</a></td>
                     <td>{{ comment.created.strftime('%d/%m/%Y at %H:%M') }}</td>
+                    <td><form action="/comment/{{ comment.key.id() }}/delete" method="post">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+        <button type="submit" class="btn btn-danger">Delete Comment</button>
+
+    </form></td>
                   </tr>
                 {% endfor %}
                 </tbody>

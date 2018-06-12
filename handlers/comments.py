@@ -38,3 +38,19 @@ class ListCommentHandler(BaseHandler):
         }
 
         return self.render_template("list_comment.html", params=context)
+
+
+class CommentDeleteHandler(BaseHandler):
+    @validate_csrf
+    def post(self, comment_id):
+        logged_user = users.get_current_user()
+
+        comment = Comment.get_by_id(int(comment_id))
+        if comment.author_email == logged_user.email() or users.is_current_user_admin():
+            comment.deleted = True
+        else:
+            return self.response.write('only the topic author or Ninja Tech Forum admin can delete the comment!')
+
+        comment.delete()
+
+        return self.redirect_to("my-comments")
