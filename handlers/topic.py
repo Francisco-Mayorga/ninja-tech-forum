@@ -1,5 +1,5 @@
 from handlers.base import BaseHandler
-from google.appengine.api import users
+from google.appengine.api import memcache, users
 from models.topic import Topic
 from models.comment import Comment
 from models.topic_subscription import TopicSubscription
@@ -54,7 +54,17 @@ class TopicDetailsHandler(BaseHandler):
 
 
 class TopicDeleteHandler(BaseHandler):
-    @validate_csrf
+    def get(self, topic_id):
+
+        topic = Topic.get_by_id(int(topic_id))
+
+        context = {
+            "topic": topic,
+        }
+
+        return self.render_template_with_csrf("topic_delete.html", params=context)
+
+
     def post(self, topic_id):
         logged_user = users.get_current_user()
 

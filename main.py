@@ -21,7 +21,6 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/task/email-new-comment', EmailNewCommentWorker, name="task-email-new-comment"),
     webapp2.Route('/topic/<topic_id:\d+>/delete', TopicDeleteHandler, name="topic-delete"),
     webapp2.Route('/comment/<comment_id:\d+>/delete', CommentDeleteHandler, name="comment-delete"),
-
     webapp2.Route("/cron/delete-topics", DeleteTopicsCron, name="cron-delete-topics"),
     webapp2.Route("/cron/delete-comments", DeleteCommentsCron, name="cron-delete-comments"),
     webapp2.Route("/cron/subscribe-topics", SubscribeTopicsCron, name="cron-subscribe-topics"),

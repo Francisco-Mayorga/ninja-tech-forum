@@ -41,7 +41,7 @@ class ListCommentHandler(BaseHandler):
 
 
 class CommentDeleteHandler(BaseHandler):
-    @validate_csrf
+
     def post(self, comment_id):
         logged_user = users.get_current_user()
 
@@ -53,4 +53,4 @@ class CommentDeleteHandler(BaseHandler):
 
         comment.delete()
 
-        return self.redirect_to("my-comments")
+        return self.redirect_to("comment-delete")
