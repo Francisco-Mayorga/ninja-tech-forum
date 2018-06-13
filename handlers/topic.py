@@ -65,6 +65,7 @@ class TopicDeleteHandler(BaseHandler):
         return self.render_template_with_csrf("topic_delete.html", params=context)
 
 
+    @validate_csrf
     def post(self, topic_id):
         logged_user = users.get_current_user()
 
@@ -76,6 +77,10 @@ class TopicDeleteHandler(BaseHandler):
 
         topic.delete()
 
+        comments = Comment.filter_by_topic(int(topic_id)).fetch()
+
+        for comment in comments:
+            comment.delete()
 
         return self.redirect_to("main-page")
 

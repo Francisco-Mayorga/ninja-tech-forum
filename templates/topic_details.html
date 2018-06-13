@@ -10,12 +10,12 @@
         <h1>{{ topic.title }}</h1>
         <div class="panel panel-default">
             <div class="panel-heading"><b>{{ topic.author_email }}, {{ topic.created.strftime('%d/%m/%Y at %H:%M') }}</b>
-                      <div class="pull-right">
+                <div class="pull-right">
             {% if not is_subscribed %}
               <a href="/topic/{{ topic.key.id() }}/subscribe" class="btn btn-info btn-xs">Subscribe</a>
             {% endif %}
 
-<!-- Small modal -->
+<!-- Large modal -->
 <a href="/topic/{{ topic.key.id() }}/delete" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Delete</button></a>
 
 
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-                      </div>
+                </div>
             </div>
                 <div class="topiclist">
                     <b>ID:</b> <p>{{ topic.key.id() }}</p>

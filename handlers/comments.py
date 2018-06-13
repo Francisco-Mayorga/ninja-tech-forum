@@ -41,6 +41,15 @@ class ListCommentHandler(BaseHandler):
 
 
 class CommentDeleteHandler(BaseHandler):
+    def get(self, comment_id):
+
+        comment = Comment.get_by_id(int(comment_id))
+
+        context = {
+            "comment": comment,
+        }
+
+        return self.render_template_with_csrf("comment_delete.html", params=context)
 
     def post(self, comment_id):
         logged_user = users.get_current_user()

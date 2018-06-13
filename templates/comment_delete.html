@@ -1,17 +1,19 @@
-{% extends "base.html" %}
 
-{% block title %}Comment Delete {{ topic.title }}{% endblock title %}
 
-{% block content %}
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
     <div class="alert alert-info fade in" role="alert">
       <h4>Are you sure you want to delete to the comment?</h4>
-      <form action="/comment/{{ comment.key.id() }}/comment" method="post">
+        <form action="/comment/{{ comment.key.id() }}/delete" method="post">
+          <div>
+          <a href="/comment/{{ comment.key.id() }}/details" class="btn btn-default">Cancel</a>
+
           <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-          <button type="submit" class="btn btn-success">Confirm</button>
-      </form>
+          <button type="submit" class="btn btn-danger">Delete</button>
+
+          </div>
+
+        </form>
     </div>
   </div>
 </div>
-{% endblock content %}
