@@ -51,6 +51,7 @@ class CommentDeleteHandler(BaseHandler):
 
         return self.render_template_with_csrf("comment_delete.html", params=context)
 
+    @validate_csrf
     def post(self, comment_id):
         logged_user = users.get_current_user()
 
@@ -62,4 +63,9 @@ class CommentDeleteHandler(BaseHandler):
 
         comment.delete()
 
-        return self.redirect_to("comment-delete")
+        comments = Comment.filter_by_topic(int(comment_id)).fetch()
+
+        for comment in comments:
+            comment.delete()
+
+        return self.redirect_to("comment-delete", comment_id=comment.key.id())

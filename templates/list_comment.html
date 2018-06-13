@@ -23,8 +23,8 @@
                     <td>{{ comment.content }}</td>
                     <td><a href="/topic/{{ comment.topic_id }}/details">{{ comment.topic_title }}</a></td>
                     <td>{{ comment.created.strftime('%d/%m/%Y at %H:%M') }}</td>
-                    <td> <!-- Large modal -->
-<a href="/comment/{{ comment.key.id() }}/delete" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Delete</button></a>
+                      <!-- Large modal -->
+                    <td><a href="/comment/{{ comment.key.id() }}/delete" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Delete</button></a>
 
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
