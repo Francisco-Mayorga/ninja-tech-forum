@@ -6,7 +6,7 @@
       <h4>Are you sure you want to delete to the comment?</h4>
         <form action="/comment/{{ comment.key.id() }}/delete" method="post">
           <div>
-          <a href="/comment/{{ comment.key.id() }}/details" class="btn btn-default">Cancel</a>
+          <a href="/list_comment" class="btn btn-default">Cancel</a>
 
           <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
           <button type="submit" class="btn btn-danger">Delete</button>
