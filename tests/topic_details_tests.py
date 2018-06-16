@@ -1,18 +1,19 @@
 import os
 import unittest
-import webapp2
+import webapp2 as webapp2
 import webtest
 
 from google.appengine.ext import testbed
-from main import MainHandler
+from handlers.topic import TopicDetailsHandler
 
 
-class MainPageTests(unittest.TestCase):
+class TopicDetailsTests(unittest.TestCase):
     def setUp(self):
         app = webapp2.WSGIApplication(
             [
-                webapp2.Route('/', MainHandler, name="main-page"),
-            ])
+                webapp2.Route('/topic/<topic_id:\d+>/details', TopicDetailsHandler, name="topic-details"),
+            ]
+        )
 
         self.testapp = webtest.TestApp(app)
         self.testbed = testbed.Testbed()
@@ -33,9 +34,12 @@ class MainPageTests(unittest.TestCase):
     def tearDown(self):
         self.testbed.deactivate()
 
-    def test_main_page_handler(self):
-        response = self.testapp.get('/')  # get main handler
-        self.assertEqual(response.status_int, 200)  # if GET request was ok, it should return 200 status code
-        self.assertIn("Welcome to Ninja Tech Forum", response.body)
+    def test_get_topic_details_handler(self):
+        # GET
+        response = self.testapp.get('/topic/<topic_id:\d+>/details')
+        self.assertEqual(response.status_in, 200)
+
+
+
 
 
