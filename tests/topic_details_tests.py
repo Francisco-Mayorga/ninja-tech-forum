@@ -2,9 +2,11 @@ import os
 import unittest
 import webapp2 as webapp2
 import webtest
-
 from google.appengine.ext import testbed
+
 from handlers.topic import TopicDetailsHandler
+from models.comment import Comment
+from models.topic import Topic
 
 
 class TopicDetailsTests(unittest.TestCase):
@@ -21,7 +23,7 @@ class TopicDetailsTests(unittest.TestCase):
 
         """ Uncomment the stubs that you need to run tests. """
         self.testbed.init_datastore_v3_stub()
-        # self.testbed.init_memcache_stub()
+        self.testbed.init_memcache_stub()
         # self.testbed.init_mail_stub()
         # self.testbed.init_taskqueue_stub()
         self.testbed.init_user_stub()
@@ -36,9 +38,15 @@ class TopicDetailsTests(unittest.TestCase):
 
     def test_get_topic_details_handler(self):
         # GET
-        response = self.testapp.get('/topic/<topic_id:\d+>/details')
-        self.assertEqual(response.status_in, 200)
 
+        topic = Topic.get_by_id(int(topic_id))
+        comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(
+            Comment.created).fetch()
+
+        details = {"topic": topic, "comments": comments}
+
+        response = self.testapp.get('/topic/5664248772427776/details', params=details)
+        self.assertEqual(response.status_in, 200)
 
 
 
