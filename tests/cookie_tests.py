@@ -1,21 +1,19 @@
 import os
 import unittest
-import webapp2 as webapp2
+import webapp2
 import webtest
+
 from google.appengine.ext import testbed
 
-from handlers.topic import TopicDetailsHandler
-from models.comment import Comment
-from models.topic import Topic
+from handlers.cookie import CookieAlertHandler
 
 
-class TopicDetailsTests(unittest.TestCase):
+class CookieAlertTests(unittest.TestCase):
     def setUp(self):
         app = webapp2.WSGIApplication(
             [
-                webapp2.Route('/topic/<topic_id:\d+>/details', TopicDetailsHandler, name="topic-details"),
-            ]
-        )
+                webapp2.Route('/set-cookie', CookieAlertHandler, name="set-cookie"),
+            ])
 
         self.testapp = webtest.TestApp(app)
         self.testbed = testbed.Testbed()
@@ -23,7 +21,7 @@ class TopicDetailsTests(unittest.TestCase):
 
         """ Uncomment the stubs that you need to run tests. """
         self.testbed.init_datastore_v3_stub()
-        self.testbed.init_memcache_stub()
+        # self.testbed.init_memcache_stub()
         # self.testbed.init_mail_stub()
         # self.testbed.init_taskqueue_stub()
         self.testbed.init_user_stub()
@@ -36,11 +34,7 @@ class TopicDetailsTests(unittest.TestCase):
     def tearDown(self):
         self.testbed.deactivate()
 
-    def test_get_topic_details_handler(self):
-        # GET
-        response = self.testapp.get('/topic/5664248772427776/details')
-        self.assertEqual(response.status_in, 200)
-
-
-
+    def test_cookie_alert_handler(self):
+        response = self.testapp.post('/set-cookie')
+        self.assertEqual(response.status_int, 200)
 
