@@ -24,15 +24,26 @@
                     <td><a href="/topic/{{ comment.topic_id }}/details">{{ comment.topic_title }}</a></td>
                     <td>{{ comment.created.strftime('%d/%m/%Y at %H:%M') }}</td>
                     <!-- Large modal -->
-                    <td><a href="/comment/{{ comment.key.id() }}/delete" type="button" class="btn btn-danger btn-xs"
-                           data-toggle="modal" data-target=".bs-example-modal-lg">Delete</a>
+                    <td><button type="button" class="btn btn-danger btn-xs"
+                           data-toggle="modal" data-target=".bs-example-modal-lg">Delete</button>
 
 
                         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                              aria-labelledby="myLargeModalLabel">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
-                                    ...
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Are you sure you want to delete to the comment?</h4>
+                                            <form action="/comment/{{ comment.key.id() }}/delete" method="post">
+                                                <div>
+                                                    <a href="/list_comment" class="btn btn-default">Cancel</a>
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

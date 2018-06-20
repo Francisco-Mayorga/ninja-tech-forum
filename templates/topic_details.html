@@ -16,11 +16,22 @@
             {% endif %}
 
 <!-- Large modal -->
-                <a href="/topic/{{ topic.key.id() }}/delete" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Delete</a>
+                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Delete</button>
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
-                      ...
+                      <div class="row">
+                          <div class="col-md-12">
+                              <h4>Are you sure you want to delete the topic "{{ topic.title }}"?</h4>
+                              <form action="/topic/{{ topic.key.id() }}/delete" method="post">
+                                  <div>
+                                      <a href="/topic/{{ topic.key.id() }}/details" class="btn btn-default">Cancel</a>
+                                      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                                      <button type="submit" class="btn btn-danger">Delete</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
                     </div>
                   </div>
                 </div>
