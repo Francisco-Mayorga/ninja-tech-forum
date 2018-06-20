@@ -54,17 +54,6 @@ class TopicDetailsHandler(BaseHandler):
 
 
 class TopicDeleteHandler(BaseHandler):
-    def get(self, topic_id):
-
-        topic = Topic.get_by_id(int(topic_id))
-
-        context = {
-            "topic": topic,
-        }
-
-        return self.render_template_with_csrf("topic_delete.html", params=context)
-
-
     @validate_csrf
     def post(self, topic_id):
         logged_user = users.get_current_user()

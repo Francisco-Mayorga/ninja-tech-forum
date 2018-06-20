@@ -37,19 +37,20 @@ class ListCommentHandler(BaseHandler):
             "comments": comments,
         }
 
-        return self.render_template("list_comment.html", params=context)
+        return self.render_template_with_csrf("list_comment.html", params=context)
 
 
 class CommentDeleteHandler(BaseHandler):
     def get(self, comment_id):
-
         comment = Comment.get_by_id(int(comment_id))
+        topic = Topic.get_by_id(comment.topic_id)
 
         context = {
             "comment": comment,
+            "topic": topic,
         }
 
-        return self.render_template_with_csrf("comment_delete.html", params=context)
+        return self.render_template_with_csrf("list_comment.html", params=context)
 
     @validate_csrf
     def post(self, comment_id):
