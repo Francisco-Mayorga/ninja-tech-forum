@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <textarea name="text" class="form-control" rows="6" required></textarea>
                         </div>
-                        <div class="panel-heading">What is the sum of 2 and 8?</div>
+                        <div class="panel-heading" id="add-question"></div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="humans" id="add-two-numbers" required>
                         </div>
@@ -34,11 +34,17 @@
 {% block scripts %}
 <script>
     $(document).ready(function() {
+        var $randomNumber1 = Math.floor((Math.random() * 10) + 1);
+        var $randomNumber2 = Math.floor((Math.random() * 10) + 1);
+        var $randomNumberSum = $randomNumber1 + $randomNumber2;
+
+        $("#add-question").text("What is the sum of " + $randomNumber1 + " and " + $randomNumber2 + "?");
+
         var $addTopicButton = $("#add-topic-button");
         var $addTwoNumbers = $("#add-two-numbers");
 
         $addTopicButton.on('click', function(event) {
-            if ($addTwoNumbers.val() === "10"){
+            if ($addTwoNumbers.val() === $randomNumberSum.toString()){
             $addTopicButton.addClass('hidden');
             } else {
             event.preventDefault();
