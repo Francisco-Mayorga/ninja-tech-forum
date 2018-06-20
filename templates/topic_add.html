@@ -38,10 +38,11 @@
         var $addTwoNumbers = $("#add-two-numbers");
 
         $addTopicButton.on('click', function(event) {
-            if ($addTwoNumbers.val() === "10")
-            {$addTopicButton.addClass('hidden');
-            console.log("correct");} else {event.preventDefault();
-            console.log("wrong");}
+            if ($addTwoNumbers.val() === "10"){
+            $addTopicButton.addClass('hidden');
+            } else {
+            event.preventDefault();
+            }
         });
     });
 </script>
